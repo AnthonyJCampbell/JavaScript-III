@@ -51,3 +51,7 @@ Timmy.speak();
 // code example for Explicit Binding
 const timmmySpeak = Timmy.speak.bind(Timmy);
 timmmySpeak();
+
+// THIS IS STILL REALLY VAGUE FOR ME. I'M NOT ENTIRELY SURE WHAT METHOD OUGHT TO BE USED WHERE
+// I KNOW IT'S USE IN REACT, ESPECIALLY FOR SETTING STATE.
+// HOWEVER, OUTSIDE OF THAT, I FAIL TO SEE WHY IT'S SO USEFUL

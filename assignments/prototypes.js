@@ -39,9 +39,55 @@
   * Instances of CharacterStats should have all of the same properties as GameObject.
 */
 
+
+// GAME OBJECT
+
+function GameObject(attributes) {
+  this.createdAt = attributes.createdAt;
+  this.dimensions = attributes.dimensions;
+}
+
+GameObject.prototype.destroy = function () {
+  return (`${this.name} was removed from the game`);
+};
+
+const testOBJ = new GameObject({createdAt : '01/05/05', dimensions : '2x2x2'});
+
+// CHARACTERSTATS
+
+function CharacterStats(attributes) {
+  GameObject.call(this, {createdAt : attributes.createdAt, dimensions : attributes.dimensions})
+  this.healthPoints = attributes.healthPoints;
+  this.name = attributes.name;
+};
+CharacterStats.prototype = Object.create(GameObject.prototype);
+CharacterStats.prototype.takeDamage = function () {
+  return (`${this.name} took damage`);
+};
+
+const testCHAR = new CharacterStats({createdAt: '12/31/1996', dimensions: '186x86x52', healthPoints: 99, name: 'Anthony'});
+
+// HUMANOID
+
+function Humanoid(attributes) {
+  CharacterStats.call(this, {createdAt : attributes.createdAt, dimensions : attributes.dimensions, healthPoints : attributes.healthPoints, name : attributes.name})
+  this.team = attributes.team;
+  this.weapons = attributes.weapons;
+  this.language = attributes.language;
+};
+Humanoid.prototype = Object.create(CharacterStats.prototype);
+Humanoid.prototype.greet = function () {
+  return (`${this.name} offers a greetign in ${this.language}`)
+};
+
+const testHUMAN = new CharacterStats({createdAt: '12/31/1996', dimensions: {length: 2, width: 10, height: 25}, healthPoints: 99, name: 'Tommy', team : 'Red Team', weapons: ['Staff', 'Paper cloth'], language: 'Orkish'});
+
+
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
-/*
+
+
+
   const mage = new Humanoid({
     createdAt: new Date(),
     dimensions: {
@@ -102,7 +148,7 @@
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-*/
+
 
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
